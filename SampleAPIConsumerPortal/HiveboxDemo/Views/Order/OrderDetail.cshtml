@@ -1,0 +1,45 @@
+﻿@model HiveboxDemo.Models.OrderFullViewModel
+@{
+    ViewBag.Title = "OrderDetail";
+}
+
+<div class="row">
+    <div class="col-md-12 border-right">
+        <h3>Order Details</h3>
+        <br />
+    </div>
+
+    <div class="col-md-12 border-right">
+
+        <table class="footable table table-striped" data-paging="true" data-paging-size="15">
+            <tr>
+                <th>ID</th>
+                <th>Invoice NO</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            @foreach (var m in Model.CartItems)
+            {
+                <tr>
+                    <td>@m.Id</td>
+                    <td>@m.InvoiceId</td>
+                    <td>@m.Qty</td>
+                    <td>@m.Price</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="col-md-12 border-right">
+        <h3>Total Amount: @Model.Total</h3>
+        <br />
+    </div>
+</div>
+    @section scripts
+{
+        <script>
+            $(document).ready(function () {
+                $(".footable").footable();
+            });
+        </script>
+    }

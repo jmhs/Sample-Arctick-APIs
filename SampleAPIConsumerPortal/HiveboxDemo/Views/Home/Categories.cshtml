@@ -1,0 +1,30 @@
+﻿@model IList<HiveboxDemo.Models.Home.CategoryViewModel>
+
+
+<ul class="category-list">
+    @foreach (var category in Model)
+    {
+        <li>
+            @if (category.ChildCategories.Any())
+            {
+                <a role="button" data-toggle="collapse" href="#subCategory@(category.ID)">@category.Name</a>
+                <ul id="subCategory@(category.ID)" class="collapse">
+                    @foreach (var subCategory in category.ChildCategories)
+                    {
+                        <li>
+                            <a role="button" href="/category/@(subCategory.ID)">
+                                @subCategory.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <a role="button" href="/category/@(category.ID)">
+                    @category.Name
+                </a>
+            }
+        </li>
+    }    
+</ul>

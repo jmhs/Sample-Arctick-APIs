@@ -1,0 +1,32 @@
+﻿@model IList<HiveboxDemo.Models.Home.ItemViewModel>
+
+@if (Model.Any())
+{
+    <table class="footable table table-striped" data-paging="true" data-paging-size="15">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th align="right" class="text-right">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/item?id=@(item.ID)">
+                            @item.ItemName
+                        </a>
+                    </td>
+                    <td align="right">$ @item.Price.ToString("#,##0.00")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 class="text-danger">
+        Select a category or eneter a search term
+    </h3>
+}

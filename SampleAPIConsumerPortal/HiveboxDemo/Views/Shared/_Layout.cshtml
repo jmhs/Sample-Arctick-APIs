@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Hivebox Demo</title>
+        <link rel="stylesheet" href="~/Assets/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/Assets/css/footable.bootstrap.css" />
+        <link rel="stylesheet" href="~/Assets/css/custom.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header>                
+                <a href="/">
+                    <img src="~/Assets/img/logo.png" />
+                </a>                                               
+            </header>                    
+            @RenderBody()
+        </div>
+        <script type="text/javascript" src="~/Scripts/libs/jquery.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/bootstrap.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/footable.js"></script>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
+

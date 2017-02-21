@@ -1,0 +1,64 @@
+﻿@model HiveboxDemo.Models.Home.HomeViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="col-md-12">    
+    <div class="col-md-3 border-right">
+        <h3>All Categories</h3>
+        @Html.Partial("Categories", Model.Categories)
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <h3 class="pull-left" style="display: inline-block; padding-left: 15px;">Items</h3>
+            <div class="col-md-6 pull-right text-right" style="display: inline-block;">
+                <a href="/cart" class="btn btn-primary m-r">View Cart</a>
+                <a href="/order/orderhistory" class="btn btn-primary m-r">Order History</a>                
+                @if (!string.IsNullOrWhiteSpace(this.Request.Cookies["token"]?.Value))
+                {
+                    <a href="/logout" class="btn btn-danger">Logout</a>
+                }
+                else
+                {
+                    <a href="/login" class="btn btn-success">Login</a>
+                }
+            </div>
+        </div>
+        <div class="row">            
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input id="textSearch" type="text" class="form-control" placeholder="Enter criteria to search item">
+                    <span class="input-group-btn">
+                        <button id="searchButton" class="btn btn-success" type="button">Search</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12" style="padding-top: 20px;">
+                @Html.Partial("Items", Model.Items)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".footable").footable();
+
+            $("#searchButton").click(function () {
+                var keyword = $("#textSearch").val();
+                window.location.href = "/search?keyword=" + keyword;
+            });
+
+            $("#textSearch").keyup(function (e) {
+                var code = e.which; 
+                if (code == 13) e.preventDefault();
+                if (code == 32 || code == 13 || code == 188 || code == 186) {
+                    $("#searchButton").click();
+                }                
+            });
+        });
+    </script>
+}

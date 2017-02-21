@@ -1,0 +1,32 @@
+﻿@model List<HiveboxDemo.Models.OrderSimpleViewModel>
+@{
+    ViewBag.Title = "OrderHistory";
+}
+<div class="col-md-12">
+    <h3>Order History</h3>
+    <div class="col-md-3 border-right" style="padding-top: 20px;">
+        <table class="footable table table-striped" data-paging="true" data-paging-size="15">
+            <thead>
+                <tr>
+                    <th>Invoice NO</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr><td><a href="orderdetail?id=@m.InvoiceId">@m.InvoiceId</a></td></tr>
+                }
+            </tbody>          
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".footable").footable();
+        });
+    </script>
+}

@@ -1,0 +1,52 @@
+﻿@model HiveboxDemo.Models.CartViewModel
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<div class="col-md-12">
+    <h3>Cart Items</h3>
+
+    <div class="col-md-12 border-right" style="padding-top: 20px;">
+        <table class="footable table table-striped" data-paging="true" data-paging-size="15">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Item Name</th>
+                    <th>Qty</th>
+                    <th>Net Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.Items)
+                {
+                    <tr data-id="@m.ID" class="item">
+                        <td>@m.ItemId</td>                        
+                        <td>@m.ItemTitle</td>                        
+                        <td><input type="number" value=@m.Quantity style="width: 3em;" /></td>
+                        <td>$ @m.SubTotal.ToString("#,0.00")</td>
+                        <td><a href="cart/delete?id=@m.ID">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4 col-md-offset-6 text-right" style="padding: 30px 15px;">
+        <div><strong>Order Total:</strong> $ @(Model.Total.ToString("#,0.00"))</div>
+    </div>
+    <div class="col-md-12">
+        <a href="#" class="btn btn-primary m-r" id="updatebtn">Update</a>
+        <a href="" class="btn btn-primary">Checkout</a>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".footable").footable();
+        });
+    </script>
+}
+
